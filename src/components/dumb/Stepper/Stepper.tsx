@@ -34,10 +34,7 @@ const Stepper: React.FunctionComponent<StepperProps> = ({
   const activeStep = steps[activeIndex];
 
   return (
-    <div
-      className="flex flex-col gap-8 h-full w-4/5 py-16"
-      data-testid="Stepper"
-    >
+    <div className="flex flex-col gap-8 h-full w-full" data-testid="Stepper">
       <ol className="items-center w-full space-y-4 sm:flex sm:space-x-8 sm:space-y-0">
         {steps.map((step, index) => (
           <li
@@ -74,7 +71,21 @@ const Stepper: React.FunctionComponent<StepperProps> = ({
           disabled={activeIndex === 0}
           className="h-10 px-6 font-semibold rounded-md border border-slate-200 text-slate-900 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          Previous Step
+          <span className="inline-flex items-center gap-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="w-4 h-4"
+            >
+              <path
+                fillRule="evenodd"
+                d="M11.03 3.97a.75.75 0 010 1.06l-6.22 6.22H21a.75.75 0 010 1.5H4.81l6.22 6.22a.75.75 0 11-1.06 1.06l-7.5-7.5a.75.75 0 010-1.06l7.5-7.5a.75.75 0 011.06 0z"
+                clipRule="evenodd"
+              />
+            </svg>
+            Previous Step
+          </span>
         </button>
 
         {!activeStep.hideNextBtn && (
@@ -84,7 +95,21 @@ const Stepper: React.FunctionComponent<StepperProps> = ({
             disabled={activeIndex === steps.length - 1}
             className="h-10 px-6 font-semibold rounded-md bg-blue-600 text-white disabled:cursor-not-allowed disabled:opacity-50"
           >
-            Next Step
+            <span className="inline-flex items-center gap-2">
+              Next Step
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="w-4 h-4"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </span>
           </button>
         )}
       </div>

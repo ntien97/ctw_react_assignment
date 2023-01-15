@@ -52,46 +52,48 @@ function App() {
 
   return (
     <div className="grid h-screen place-items-center">
-      <Stepper
-        // todo: move this step header props inside
-        steps={[
-          {
-            name: "Meal",
-            description: "Select meal & party size",
-          },
-          {
-            name: "Restaurant",
-            description: "Select restaurant",
-            hideNextBtn: true,
-          },
-          {
-            name: "Dish",
-            description: "Select dish",
-          },
-          {
-            name: "Confirm",
-            description: "Confirm your order",
-          },
-        ]}
-        activeIndex={activeIndex}
-        onPrevious={() => updateActiveIndex(activeIndex - 1)}
-        onNext={() => updateActiveIndex(activeIndex + 1)}
-      >
-        <MealSelectionForm></MealSelectionForm>
-        <RestaurantSelectionForm
-          restaurants={restaurants}
-          onSelected={(selectedRestaurant) => {
-            updateActiveIndex(activeIndex + 1);
-            updateSelectedRestaurant(selectedRestaurant);
-          }}
-        ></RestaurantSelectionForm>
-        <DishSelectionForm
-          dishes={dishes.filter(
-            (dish) => dish.restaurant === selectedRestaurant
-          )}
-        ></DishSelectionForm>
-        <></>
-      </Stepper>
+      <div className="max-w-screen-xl p-8 border border-gray-200 rounded-lg shadow-md">
+        <Stepper
+          // todo: move this step header props inside
+          steps={[
+            {
+              name: "Meal",
+              description: "Select meal & party size",
+            },
+            {
+              name: "Restaurant",
+              description: "Select restaurant",
+              hideNextBtn: true,
+            },
+            {
+              name: "Dish",
+              description: "Select dish",
+            },
+            {
+              name: "Confirm",
+              description: "Confirm your order",
+            },
+          ]}
+          activeIndex={activeIndex}
+          onPrevious={() => updateActiveIndex(activeIndex - 1)}
+          onNext={() => updateActiveIndex(activeIndex + 1)}
+        >
+          <MealSelectionForm></MealSelectionForm>
+          <RestaurantSelectionForm
+            restaurants={restaurants}
+            onSelected={(selectedRestaurant) => {
+              updateActiveIndex(activeIndex + 1);
+              updateSelectedRestaurant(selectedRestaurant);
+            }}
+          ></RestaurantSelectionForm>
+          <DishSelectionForm
+            dishes={dishes.filter(
+              (dish) => dish.restaurant === selectedRestaurant
+            )}
+          ></DishSelectionForm>
+          <></>
+        </Stepper>
+      </div>
     </div>
   );
 }
