@@ -101,10 +101,13 @@ function App() {
             }
           ></MealSelectionForm>
           <RestaurantSelectionForm
-            restaurants={restaurants}
-            onSelected={(selectedRestaurant) => {
+            selectedMealType={reservation.meal}
+            onSelected={(restaurant) => {
               updateActiveIndex(activeIndex + 1);
-              updateSelectedRestaurant(selectedRestaurant);
+              updateReservation({
+                ...reservation,
+                restaurant,
+              });
             }}
           ></RestaurantSelectionForm>
           <DishSelectionForm
