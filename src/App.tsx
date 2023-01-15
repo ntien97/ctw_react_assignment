@@ -60,6 +60,7 @@ function App() {
           {
             name: "Restaurant",
             description: "Select restaurant",
+            hideNextBtn: true,
           },
           {
             name: "Dish",
@@ -77,6 +78,7 @@ function App() {
         <MealSelectionForm></MealSelectionForm>
         <RestaurantSelectionForm
           restaurants={restaurants}
+          onSelected={() => updateActiveIndex(activeIndex + 1)}
         ></RestaurantSelectionForm>
         <></>
         <></>

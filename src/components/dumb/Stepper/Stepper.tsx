@@ -4,6 +4,7 @@ import classNames from "classnames";
 interface Step {
   readonly name: string;
   readonly description?: string;
+  readonly hideNextBtn?: boolean;
 }
 
 export interface StepProps {
@@ -31,7 +32,6 @@ const Stepper: React.FunctionComponent<StepperProps> = ({
   }
 
   const activeStep = steps[activeIndex];
-  console.log(activeIndex);
 
   return (
     <div
@@ -77,14 +77,16 @@ const Stepper: React.FunctionComponent<StepperProps> = ({
           Previous Step
         </button>
 
-        <button
-          onClick={onNext}
-          type="submit"
-          disabled={activeIndex === steps.length - 1}
-          className="h-10 px-6 font-semibold rounded-md bg-blue-600 text-white disabled:cursor-not-allowed disabled:opacity-50"
-        >
-          Next Step
-        </button>
+        {!activeStep.hideNextBtn && (
+          <button
+            onClick={onNext}
+            type="submit"
+            disabled={activeIndex === steps.length - 1}
+            className="h-10 px-6 font-semibold rounded-md bg-blue-600 text-white disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            Next Step
+          </button>
+        )}
       </div>
     </div>
   );
