@@ -8,6 +8,7 @@ import { Restaurant } from "./interfaces/restaurant.interface";
 import { Meal } from "./interfaces/meal.enum";
 import Stepper from "./components/dumb/Stepper/Stepper";
 import DishSelectionForm from "./components/DishSelectionForm/DishSelectionForm";
+import { Reservation } from "./interfaces/reservation.interface";
 
 function App() {
   const dishes: Dish[] = Dishes.dishes.map(({ availableMeals, ...remain }) => ({
@@ -50,6 +51,13 @@ function App() {
   const [activeIndex, updateActiveIndex] = useState(0);
   const [selectedRestaurant, updateSelectedRestaurant] = useState<string>();
 
+  const [reservation, updateReservation] = useState<Reservation>({
+    meal: Meal.Breakfast,
+    partySize: 1,
+    restaurant: "",
+    dishes: [],
+  });
+
   return (
     <div className="grid h-screen place-items-center">
       <div className="max-w-screen-xl p-8 border border-gray-200 rounded-lg shadow-md">
@@ -78,7 +86,20 @@ function App() {
           onPrevious={() => updateActiveIndex(activeIndex - 1)}
           onNext={() => updateActiveIndex(activeIndex + 1)}
         >
-          <MealSelectionForm></MealSelectionForm>
+          <MealSelectionForm
+            selectedMeal={reservation.meal}
+            // todo: check if this is a good way to update state
+            updateSelectedMeal={(meal) =>
+              updateReservation({ ...reservation, meal })
+            }
+            partySize={reservation.partySize}
+            updatePartySize={(partySize) =>
+              updateReservation({
+                ...reservation,
+                partySize,
+              })
+            }
+          ></MealSelectionForm>
           <RestaurantSelectionForm
             restaurants={restaurants}
             onSelected={(selectedRestaurant) => {

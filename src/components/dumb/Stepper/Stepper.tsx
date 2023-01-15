@@ -38,6 +38,7 @@ const Stepper: React.FunctionComponent<StepperProps> = ({
       <ol className="items-center w-full space-y-4 sm:flex sm:space-x-8 sm:space-y-0">
         {steps.map((step, index) => (
           <li
+            key={index}
             className={classNames("flex items-center space-x-2.5", {
               "text-blue-600": index === activeIndex,
               "text-gray-600": index !== activeIndex,
