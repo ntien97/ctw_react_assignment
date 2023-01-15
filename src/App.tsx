@@ -7,6 +7,7 @@ import { Dish } from "./interfaces/dish.interface";
 import { Restaurant } from "./interfaces/restaurant.interface";
 import { Meal } from "./interfaces/meal.enum";
 import Stepper from "./components/dumb/Stepper/Stepper";
+import DishSelectionForm from "./components/DishSelectionForm/DishSelectionForm";
 
 function App() {
   const dishes: Dish[] = Dishes.dishes.map(({ availableMeals, ...remain }) => ({
@@ -47,6 +48,7 @@ function App() {
   );
 
   const [activeIndex, updateActiveIndex] = useState(0);
+  const [selectedRestaurant, updateSelectedRestaurant] = useState<string>();
 
   return (
     <div className="grid h-screen place-items-center">
@@ -78,9 +80,16 @@ function App() {
         <MealSelectionForm></MealSelectionForm>
         <RestaurantSelectionForm
           restaurants={restaurants}
-          onSelected={() => updateActiveIndex(activeIndex + 1)}
+          onSelected={(selectedRestaurant) => {
+            updateActiveIndex(activeIndex + 1);
+            updateSelectedRestaurant(selectedRestaurant);
+          }}
         ></RestaurantSelectionForm>
-        <></>
+        <DishSelectionForm
+          dishes={dishes.filter(
+            (dish) => dish.restaurant === selectedRestaurant
+          )}
+        ></DishSelectionForm>
         <></>
       </Stepper>
     </div>

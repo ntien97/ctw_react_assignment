@@ -3,15 +3,15 @@ import { Restaurant } from "../../interfaces/restaurant.interface";
 
 interface RestaurantSelectionFormProps {
   readonly restaurants: Restaurant[];
-  readonly onSelected: () => void;
+  readonly onSelected: (selectedRestaurant: string) => void;
 }
 
 const RestaurantBlock: FC<{
   restaurant: Restaurant;
-  onSelected: () => void;
+  onSelected: (restaurant: string) => void;
 }> = ({ restaurant, onSelected }) => (
   <div
-    onClick={onSelected}
+    onClick={() => onSelected(restaurant.name)}
     className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100"
   >
     <div className="flex items-center w-full text-lg font-semibold content-start gap-2">

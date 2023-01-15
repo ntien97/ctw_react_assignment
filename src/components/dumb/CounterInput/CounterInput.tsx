@@ -38,13 +38,13 @@ const CounterInput: FC<CounterInputProps> = ({
         />
       </svg>
     </button>
+    {/*TODO Make this input accept value from keyboard*/}
     <input
       min={min}
       max={max}
       type="number"
       className="w-16 outline-none focus:outline-none text-center border border-gray bg-white font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  outline-none"
       value={currentValue}
-      disabled
     ></input>
     <button
       disabled={currentValue === max}
