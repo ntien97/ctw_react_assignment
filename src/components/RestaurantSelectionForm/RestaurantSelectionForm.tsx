@@ -1,10 +1,14 @@
 import React, { FC } from "react";
 import styles from "./RestaurantSelectionForm.module.css";
+import { Restaurant } from "../../interfaces/restaurant.interface";
 
 interface RestaurantSelectionFormProps {
+  readonly restaurants: Restaurant[];
 }
 
-const RestaurantSelectionForm: FC<RestaurantSelectionFormProps> = () => (
+const RestaurantSelectionForm: FC<RestaurantSelectionFormProps> = ({
+  restaurants,
+}) => (
   <div
     className={styles.RestaurantSelectionForm}
     data-testid="RestaurantSelectionForm"
@@ -25,10 +29,9 @@ const RestaurantSelectionForm: FC<RestaurantSelectionFormProps> = () => (
             className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
           >
             {/*todo: Upgrade the restaurant componet*/}
-            {/*todo: retrieve the list from the api*/}
-            <option>M Coffee</option>
-            <option>B Coffee</option>
-            <option>A Coffee</option>
+            {restaurants.map((restaurant) => (
+              <option>{restaurant.name}</option>
+            ))}
           </select>
         </div>
       </div>

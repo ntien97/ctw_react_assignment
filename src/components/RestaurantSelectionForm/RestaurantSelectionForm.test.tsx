@@ -5,7 +5,7 @@ import RestaurantSelectionForm from "./RestaurantSelectionForm";
 
 describe("<RestaurantSelectionForm />", () => {
   test("it should mount", () => {
-    render(<RestaurantSelectionForm />);
+    render(<RestaurantSelectionForm restaurants={[]} />);
 
     const restaurantSelectionForm = screen.getByTestId(
       "RestaurantSelectionForm"
