@@ -14,10 +14,10 @@ const RestaurantBlock: FC<RestaurantBlockProps> = ({
     onClick={() => onSelected(restaurant.name)}
     className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100"
   >
-    <div className="flex items-center w-full text-lg font-semibold content-start gap-2">
+    <div className="flex items-center w-full text-lg font-bold content-start gap-2">
       <img
-        className="w-10 h-10 aspect-square border border-gray-200 rounded"
-        src="/abc.jpg"
+        className="w-10 h-10 aspect-square rounded-lg"
+        src={`./assets/restaurant/${restaurant.name}.png`}
         alt="no-image-available"
       ></img>
       <span>{restaurant.name}</span>

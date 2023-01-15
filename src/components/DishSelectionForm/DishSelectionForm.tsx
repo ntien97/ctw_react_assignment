@@ -51,7 +51,7 @@ const DishSelectionForm: FC<DishSelectionFormProps> = ({
         make sure you and all your friends have their food!
       </div>
     </div>
-    <div className="grid grid-cols-3 gap-3">
+    <div className="grid grid-cols-2 gap-2">
       {dishesDatasource
         .filter(
           (dish) =>

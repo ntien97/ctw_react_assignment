@@ -16,7 +16,7 @@ const CounterInput: FC<CounterInputProps> = ({
   max,
 }) => (
   <div
-    className="flex flex-row h-10 rounded-lg bg-transparent "
+    className="flex flex-row h-10 rounded-lg bg-transparent"
     data-testid="CounterInput"
   >
     <button
