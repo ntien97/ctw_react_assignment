@@ -16,7 +16,9 @@ const DishBlock: FC<DishBlockProps> = ({ dish, currentCount, updateCount }) => (
       alt="no-image-available"
     ></img>
     <div className="flex flex-col items-end w-full text-lg font-semibold content-start gap-2">
-      <div className="w-full flex flex-row justify-start"><span className="font-bold">{dish.name}</span></div>
+      <div className="w-full flex flex-row justify-start">
+        <span className="font-bold">{dish.name}</span>
+      </div>
       <CounterInput
         max={1000}
         min={0}
@@ -25,7 +27,6 @@ const DishBlock: FC<DishBlockProps> = ({ dish, currentCount, updateCount }) => (
         onDecrease={() => updateCount(currentCount - 1)}
       ></CounterInput>
     </div>
-
   </div>
 );
 

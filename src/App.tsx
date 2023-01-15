@@ -10,15 +10,6 @@ import ReservationConfirmation from "./components/ReservationConfirmation/Reserv
 
 function App() {
   const [activeStepIdx, updateActiveStepIdx] = useState(0);
-  const initialReservationState = {
-    meal: Meal.Breakfast,
-    partySize: 1,
-    restaurant: "",
-    dishes: [],
-  } as const;
-  const [reservation, updateReservation] = useState<Reservation>(
-    initialReservationState
-  );
   const stepConfigs: StepConfig[] = [
     {
       name: "Meal",
@@ -44,13 +35,29 @@ function App() {
     },
   ];
 
+  const initialReservationState = {
+    meal: Meal.Breakfast,
+    partySize: 1,
+    restaurant: "",
+    dishes: [],
+  } as const;
+  const [reservation, updateReservation] = useState<Reservation>(
+    initialReservationState
+  );
+
   const resetReservation = () => {
     updateActiveStepIdx(0);
     updateReservation(initialReservationState);
   };
 
   return (
-    <div className="grid h-screen place-items-center">
+    <div className="flex flex-col h-screen place-items-center">
+      <h1 className="mt-16 mb-8 text-3xl font-extrabold text-gray-900 md:text-5xl lg:text-6xl">
+        <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
+          Grab
+        </span>{" "}
+        A Bite!
+      </h1>
       <div className="max-w-screen-xl p-8 border border-gray-200 rounded-lg shadow-md">
         <Stepper
           stepConfigs={stepConfigs}
