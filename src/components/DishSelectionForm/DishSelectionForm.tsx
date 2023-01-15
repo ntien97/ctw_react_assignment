@@ -1,45 +1,47 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import { Dish } from "../../interfaces/dish.interface";
-import CounterInput from "../dumb/CounterInput/CounterInput";
+import Dishes from "../../data/dishes.json";
+import { Meal } from "../../interfaces/meal.enum";
+import DishBlock from "./DishBlock/DishBlock";
+import { ReservationDishes } from "../../interfaces/reservation.interface";
+
+const dishes: Dish[] = Dishes.dishes.map(({ availableMeals, ...remain }) => ({
+  ...remain,
+  availableMeals: availableMeals as Meal[],
+}));
 
 interface DishSelectionFormProps {
-  dishes: Dish[];
+  readonly selectedMealType: Meal;
+  readonly selectedRestaurant: string;
+  readonly reservationDishes: ReservationDishes;
+  readonly onDishChanges: (id: number, count: number) => void;
 }
 
-const DishBlock: FC<{
-  dish: Dish;
-}> = ({ dish }) => {
-  const [currentDishCount, updateCurrentDishCount] = useState(0);
-
-  return (
-    <div className="flex flex-col gap-8 items-end justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg">
-      <div className="flex items-center w-full text-lg font-semibold content-start gap-2">
-        <img
-          className="w-10 h-10 aspect-square border border-gray-200 rounded"
-          src="/abc.jpg"
-          alt="no-image-available"
-        ></img>
-        <span>{dish.name}</span>
-      </div>
-      <CounterInput
-        max={1000}
-        min={0}
-        currentValue={currentDishCount}
-        onIncrease={() => currentDishCount + 1}
-        onDecrease={() => currentDishCount - 1}
-      ></CounterInput>
-    </div>
-  );
-};
-const DishSelectionForm: FC<DishSelectionFormProps> = ({ dishes }) => (
+const DishSelectionForm: FC<DishSelectionFormProps> = ({
+  selectedRestaurant,
+  selectedMealType,
+  reservationDishes,
+  onDishChanges,
+}) => (
   <>
     <h3 className="mb-5 text-lg font-medium text-gray-900">
       Please Pre-order your food
     </h3>
     <div className="grid grid-cols-3 gap-3">
-      {dishes.map((dish) => (
-        <DishBlock dish={dish}></DishBlock>
-      ))}
+      {dishes
+        .filter(
+          (dish) =>
+            dish.restaurant === selectedRestaurant &&
+            dish.availableMeals.includes(selectedMealType)
+        )
+        .map((dish) => (
+          <DishBlock
+            key={dish.id}
+            dish={dish}
+            currentCount={reservationDishes[dish.id] || 0}
+            updateCount={(count) => onDishChanges(dish.id, count)}
+          ></DishBlock>
+        ))}
     </div>
   </>
 );

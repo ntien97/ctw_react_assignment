@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./App.css";
 import MealSelectionForm from "./components/MealSelectionForm/MealSelectionForm";
 import RestaurantSelectionForm from "./components/RestaurantSelectionForm/RestaurantSelectionForm";
-import Dishes from "./data/dishes.json";
 import { Dish } from "./interfaces/dish.interface";
 import { Restaurant } from "./interfaces/restaurant.interface";
 import { Meal } from "./interfaces/meal.enum";
@@ -11,46 +10,7 @@ import DishSelectionForm from "./components/DishSelectionForm/DishSelectionForm"
 import { Reservation } from "./interfaces/reservation.interface";
 
 function App() {
-  const dishes: Dish[] = Dishes.dishes.map(({ availableMeals, ...remain }) => ({
-    ...remain,
-    availableMeals: availableMeals as Meal[],
-  }));
-
-  const restaurants: Restaurant[] = Object.values(
-    dishes.reduce<{ [key: string]: Restaurant }>(
-      (restaurantMap, currentDish) => {
-        const { restaurant, ...dish } = currentDish;
-
-        return {
-          ...restaurantMap,
-          [restaurant]: restaurantMap[restaurant]
-            ? {
-                ...restaurantMap[restaurant],
-                availableDish: [
-                  ...restaurantMap[restaurant].availableDish,
-                  dish,
-                ],
-                availableMeals: [
-                  ...new Set([
-                    ...restaurantMap[restaurant].availableMeals,
-                    ...dish.availableMeals,
-                  ]),
-                ],
-              }
-            : {
-                name: restaurant,
-                availableDish: [dish],
-                availableMeals: dish.availableMeals,
-              },
-        };
-      },
-      {}
-    )
-  );
-
   const [activeIndex, updateActiveIndex] = useState(0);
-  const [selectedRestaurant, updateSelectedRestaurant] = useState<string>();
-
   const [reservation, updateReservation] = useState<Reservation>({
     meal: Meal.Breakfast,
     partySize: 1,
@@ -111,9 +71,15 @@ function App() {
             }}
           ></RestaurantSelectionForm>
           <DishSelectionForm
-            dishes={dishes.filter(
-              (dish) => dish.restaurant === selectedRestaurant
-            )}
+            selectedMealType={reservation.meal}
+            selectedRestaurant={reservation.restaurant}
+            reservationDishes={reservation.dishes}
+            onDishChanges={(id, count) =>
+              updateReservation({
+                ...reservation,
+                dishes: { ...reservation.dishes, [id]: count },
+              })
+            }
           ></DishSelectionForm>
           <></>
         </Stepper>

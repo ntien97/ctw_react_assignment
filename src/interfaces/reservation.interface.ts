@@ -1,9 +1,12 @@
 import { Meal } from "./meal.enum";
-import { Dish } from "./dish.interface";
+
+export type ReservationDishes = {
+  [key in number]: number;
+};
 
 export interface Reservation {
   readonly meal: Meal;
   readonly partySize: number;
   readonly restaurant: string;
-  readonly dishes: (Pick<Dish, "id"> & { count: number })[];
+  readonly dishes: ReservationDishes;
 }
