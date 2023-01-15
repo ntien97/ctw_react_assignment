@@ -1,25 +1,42 @@
-import React, { FC } from "react";
+import React, { PropsWithChildren, ReactNode } from "react";
 
 interface Step {
   readonly name: string;
   readonly description?: string;
-  readonly component: React.ReactElement;
+}
+
+export interface StepProps {
+  readonly step: Step;
 }
 
 interface StepperProps {
   readonly steps: Step[];
   readonly activeIndex: number;
+  readonly onNext: () => void;
+  readonly onPrevious: () => void;
+
+  readonly children: ReactNode[];
 }
 
 const stepColor = (isActive: boolean) => (isActive ? "blue" : "gray");
-
-const Stepper: FC<StepperProps> = ({ steps, activeIndex }) => {
-  if (activeIndex > steps.length) {
+const Stepper: React.FunctionComponent<StepperProps> = ({
+  steps,
+  activeIndex,
+  onNext,
+  onPrevious,
+  children,
+}) => {
+  if (activeIndex > children.length) {
     throw new Error("activeIndex cannot be larger than steps length");
   }
 
+  const activeStep = steps[activeIndex];
+
   return (
-    <div className="flex flex-col gap-8" data-testid="Stepper">
+    <div
+      className="flex flex-col gap-8 h-full w-4/5 py-16"
+      data-testid="Stepper"
+    >
       <ol className="items-center w-full space-y-4 sm:flex sm:space-x-8 sm:space-y-0">
         {steps.map((step, index) => (
           <li
@@ -42,19 +59,23 @@ const Stepper: FC<StepperProps> = ({ steps, activeIndex }) => {
         ))}
       </ol>
 
-      {steps[activeIndex].component}
+      <div className="h-1/2">{children[activeIndex]}</div>
 
       <div className="flex flex-row justify-between">
         <button
+          onClick={onPrevious}
           type="submit"
-          className="h-10 px-6 font-semibold rounded-md border border-slate-200 text-slate-900"
+          disabled={activeIndex === 0}
+          className="h-10 px-6 font-semibold rounded-md border border-slate-200 text-slate-900 disabled:cursor-not-allowed disabled:opacity-50"
         >
           Previous Step
         </button>
 
         <button
+          onClick={onNext}
           type="submit"
-          className="h-10 px-6 font-semibold rounded-md bg-blue-600 text-white"
+          disabled={activeIndex === steps.length - 1}
+          className="h-10 px-6 font-semibold rounded-md bg-blue-600 text-white disabled:cursor-not-allowed disabled:opacity-50"
         >
           Next Step
         </button>

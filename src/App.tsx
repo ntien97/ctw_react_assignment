@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import MealSelectionForm from "./components/MealSelectionForm/MealSelectionForm";
 import RestaurantSelectionForm from "./components/RestaurantSelectionForm/RestaurantSelectionForm";
@@ -46,37 +46,41 @@ function App() {
     )
   );
 
+  const [activeIndex, updateActiveIndex] = useState(0);
+
   return (
     <div className="grid h-screen place-items-center">
       <Stepper
+        // todo: move this step header props inside
         steps={[
           {
             name: "Meal",
             description: "Something",
-            component: <MealSelectionForm></MealSelectionForm>,
           },
           {
             name: "Restaurant",
             description: "Select restaurant",
-            component: (
-              <RestaurantSelectionForm
-                restaurants={restaurants}
-              ></RestaurantSelectionForm>
-            ),
           },
           {
             name: "Dish",
             description: "Select dish",
-            component: <></>,
           },
           {
             name: "Confirm",
             description: "Confirm your order",
-            component: <></>,
           },
         ]}
-        activeIndex={0}
-      ></Stepper>
+        activeIndex={activeIndex}
+        onPrevious={() => updateActiveIndex(activeIndex - 1)}
+        onNext={() => updateActiveIndex(activeIndex + 1)}
+      >
+        <MealSelectionForm></MealSelectionForm>
+        <RestaurantSelectionForm
+          restaurants={restaurants}
+        ></RestaurantSelectionForm>
+        <></>
+        <></>
+      </Stepper>
     </div>
   );
 }

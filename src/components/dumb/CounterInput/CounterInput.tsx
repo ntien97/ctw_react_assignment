@@ -1,36 +1,51 @@
 import React, { FC } from "react";
-import styles from "./CounterInput.module.css";
 
 interface CounterInputProps {}
 
 const CounterInput: FC<CounterInputProps> = () => (
-  <div className={styles.CounterInput} data-testid="CounterInput">
-    <label
-      htmlFor="custom-input-number"
-      className="block text-sm font-medium text-gray-700"
+  <div
+    className="flex flex-row h-10 rounded-lg bg-transparent "
+    data-testid="CounterInput"
+  >
+    <button
+      data-action="decrement"
+      className="p-2 border border-gray bg-white text-gray-600 hover:text-gray-600 hover:bg-gray-100 h-full w-8 rounded-l cursor-pointer outline-none"
     >
-      Please Enter number of people
-    </label>
-    <div className="flex flex-row h-10 w-full rounded-lg relative bg-transparent mt-1">
-      <button
-        data-action="decrement"
-        className=" border border-gray bg-white text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none"
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        className="w-full"
       >
-        <span className="m-auto text-2xl font-thin">−</span>
-      </button>
-      <input
-        type="number"
-        className="outline-none focus:outline-none text-center w-full border border-gray bg-white font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  outline-none"
-        name="custom-input-number"
-        value="0"
-      ></input>
-      <button
-        data-action="increment"
-        className="border border-gray bg-white text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r cursor-pointer"
+        <path
+          fillRule="evenodd"
+          d="M3.75 12a.75.75 0 01.75-.75h15a.75.75 0 010 1.5h-15a.75.75 0 01-.75-.75z"
+          clipRule="evenodd"
+        />
+      </svg>
+    </button>
+    <input
+      type="number"
+      className="w-16 outline-none focus:outline-none text-center border border-gray bg-white font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  outline-none"
+      value="0"
+    ></input>
+    <button
+      data-action="increment"
+      className="p-2 border border-gray bg-white text-gray-600 hover:text-gray-600 hover:bg-gray-100 h-full w-8 rounded-r cursor-pointer outline-none"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        className="w-full"
       >
-        <span className="m-auto text-2xl font-thin">+</span>
-      </button>
-    </div>
+        <path
+          fillRule="evenodd"
+          d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z"
+          clipRule="evenodd"
+        />
+      </svg>
+    </button>
   </div>
 );
 

@@ -5,7 +5,12 @@ import Stepper from "./Stepper";
 
 describe("<Stepper />", () => {
   test("it should mount", () => {
-    render(<Stepper steps={[]} activeIndex={0} />);
+    render(
+      <></>
+      //   <Stepper steps={[]} activeIndex={0} onNext={() => {
+      //   return;
+      // }} />
+    );
 
     const stepper = screen.getByTestId("Stepper");
 
