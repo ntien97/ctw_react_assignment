@@ -6,13 +6,13 @@ export interface StepConfig {
   readonly description: string;
   readonly hideNextBtn?: boolean;
   readonly disableNextBtnCondition?: () => boolean;
+  readonly customerBackBtnActions?: () => void;
 }
 
 interface StepperProps {
   readonly stepConfigs: StepConfig[];
   readonly activeIndex: number;
-  readonly onNext: () => void;
-  readonly onPrevious: () => void;
+  readonly updateActiveIndex: (value: number) => void;
   readonly onComplete: () => void;
   readonly children: ReactNode[];
 }
@@ -20,8 +20,7 @@ interface StepperProps {
 const Stepper: React.FunctionComponent<StepperProps> = ({
   stepConfigs,
   activeIndex,
-  onNext,
-  onPrevious,
+  updateActiveIndex,
   onComplete,
   children,
 }) => {
@@ -66,7 +65,11 @@ const Stepper: React.FunctionComponent<StepperProps> = ({
       <div className="flex flex-row justify-between content-end w-full">
         {activeIndex > 0 && (
           <button
-            onClick={onPrevious}
+            onClick={() => {
+              updateActiveIndex(activeIndex - 1);
+              activeStepConfig.customerBackBtnActions &&
+                activeStepConfig.customerBackBtnActions();
+            }}
             type="submit"
             className="h-10 px-6 font-semibold rounded-md border border-slate-200 text-slate-900 disabled:cursor-not-allowed disabled:opacity-50"
           >
@@ -91,7 +94,7 @@ const Stepper: React.FunctionComponent<StepperProps> = ({
         {!activeStepConfig.hideNextBtn &&
           activeIndex !== stepConfigs.length - 1 && (
             <button
-              onClick={onNext}
+              onClick={() => updateActiveIndex(activeIndex + 1)}
               type="submit"
               disabled={
                 activeStepConfig.disableNextBtnCondition &&

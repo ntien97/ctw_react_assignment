@@ -1,31 +1,36 @@
-# G123 React Assignment
-
-## Author notes
+# Author notes
 
 ```
 Name: Nguyen Huu Anh Tien
 Mail: nghuuanhtien@gmail.com
 ```
+
 #### I made the following UI/UX improvements based on the wireframes provided
 
-For simple action, prioritize default values over error messages. 
+For simple action, prioritize default values over error messages.
+
 ```
-Simple actions should not be prone to error; if the UI is clear enough, the user will naturally understand it, rather than specific messages. 
+Simple actions should not be prone to error; if the UI is clear enough, the user will naturally understand it, rather than specific messages.
 As an example:
-  Instead of displaying error messages when the user exceeds the maximum party size of ten, the button is disabled. 
+  Instead of displaying error messages when the user exceeds the maximum party size of ten, the button is disabled.
 ```
-Because this is a food-related app, images should be prioritized. 
+
+Because this is a food-related app, images should be prioritized.
+
 ```
 I downloaded some images and named them, but the source of these images should be returned from the backend in a real-world application scenario (dishes.json). But I want to keep the dishes.json file intact.
 ```
-Step-by-step UX improvement:
-  - Step 1: 
-    - Switch the Meal option from Select to Radio (only 1 meal can be selected at one time)
-    - Using the - and + buttons, change the party size selection to a number input.
-  - Step 2: Instead of hiding within the Select menu, all available restaurants should be displayed with their logos.
-  - Step 3: Display all available dishes once more.
-  - Step 4: Almost identical, but laid out in a more readable manner.
 
+Step-by-step UX improvement:
+
+- Step 1:
+  - Switch the Meal option from Select to Radio (only 1 meal can be selected at one time)
+  - Using the - and + buttons, change the party size selection to a number input.
+- Step 2: Instead of hiding within the Select menu, all available restaurants should be displayed with their logos.
+- Step 3: Display all available dishes once more.
+- Step 4: Almost identical, but laid out in a more readable manner.
+
+# G123 React Assignment
 
 | This assignment is aimed to help us know more about your `React` skills.
 

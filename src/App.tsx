@@ -23,6 +23,11 @@ function App() {
     {
       name: "Dish",
       description: "Pre-order your food",
+      customerBackBtnActions: () =>
+        updateReservation({
+          ...reservation,
+          dishes: initialReservationState.dishes,
+        }),
       disableNextBtnCondition: () =>
         Object.values(reservation.dishes).reduce(
           (total, count) => total + count,
@@ -39,7 +44,7 @@ function App() {
     meal: Meal.Breakfast,
     partySize: 1,
     restaurant: "",
-    dishes: [],
+    dishes: {},
   } as const;
   const [reservation, updateReservation] = useState<Reservation>(
     initialReservationState
@@ -62,8 +67,7 @@ function App() {
         <Stepper
           stepConfigs={stepConfigs}
           activeIndex={activeStepIdx}
-          onPrevious={() => updateActiveStepIdx(activeStepIdx - 1)}
-          onNext={() => updateActiveStepIdx(activeStepIdx + 1)}
+          updateActiveIndex={updateActiveStepIdx}
           onComplete={() => {
             // TODO: Connect the backend here!
             console.log(reservation);
@@ -72,7 +76,6 @@ function App() {
         >
           <MealSelectionForm
             selectedMeal={reservation.meal}
-            // todo: check if this is a good way to update state
             updateSelectedMeal={(meal) =>
               updateReservation({ ...reservation, meal })
             }
