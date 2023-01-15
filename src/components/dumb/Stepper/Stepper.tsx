@@ -1,4 +1,5 @@
-import React, { PropsWithChildren, ReactNode } from "react";
+import React, { ReactNode } from "react";
+import classNames from "classnames";
 
 interface Step {
   readonly name: string;
@@ -18,7 +19,6 @@ interface StepperProps {
   readonly children: ReactNode[];
 }
 
-const stepColor = (isActive: boolean) => (isActive ? "blue" : "gray");
 const Stepper: React.FunctionComponent<StepperProps> = ({
   steps,
   activeIndex,
@@ -31,6 +31,7 @@ const Stepper: React.FunctionComponent<StepperProps> = ({
   }
 
   const activeStep = steps[activeIndex];
+  console.log(activeIndex);
 
   return (
     <div
@@ -40,14 +41,19 @@ const Stepper: React.FunctionComponent<StepperProps> = ({
       <ol className="items-center w-full space-y-4 sm:flex sm:space-x-8 sm:space-y-0">
         {steps.map((step, index) => (
           <li
-            className={`flex items-center text-${stepColor(
-              index === activeIndex
-            )}-600 space-x-2.5`}
+            className={classNames("flex items-center space-x-2.5", {
+              "text-blue-600": index === activeIndex,
+              "text-gray-600": index !== activeIndex,
+            })}
           >
             <span
-              className={`flex items-center justify-center w-8 h-8 border border-${stepColor(
-                index === activeIndex
-              )}-600 rounded-full shrink-0`}
+              className={classNames(
+                "flex items-center justify-center w-8 h-8 border rounded-full shrink-0",
+                {
+                  "border-blue-600": index === activeIndex,
+                  "border-gray-600": index !== activeIndex,
+                }
+              )}
             >
               {index + 1}
             </span>
@@ -59,7 +65,7 @@ const Stepper: React.FunctionComponent<StepperProps> = ({
         ))}
       </ol>
 
-      <div className="h-1/2">{children[activeIndex]}</div>
+      <div className="min-h-1/5">{children[activeIndex]}</div>
 
       <div className="flex flex-row justify-between">
         <button

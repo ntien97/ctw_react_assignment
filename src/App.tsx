@@ -55,7 +55,7 @@ function App() {
         steps={[
           {
             name: "Meal",
-            description: "Something",
+            description: "Select meal & party size",
           },
           {
             name: "Restaurant",
