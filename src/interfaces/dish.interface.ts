@@ -5,6 +5,5 @@ export interface Dish {
   readonly name: string;
 
   readonly restaurant: string;
-
   readonly availableMeals: Meal[];
 }

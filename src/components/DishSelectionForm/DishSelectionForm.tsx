@@ -5,10 +5,12 @@ import { Meal } from "../../interfaces/meal.enum";
 import DishBlock from "./DishBlock/DishBlock";
 import { ReservationDishes } from "../../interfaces/reservation.interface";
 
-const dishes: Dish[] = Dishes.dishes.map(({ availableMeals, ...remain }) => ({
-  ...remain,
-  availableMeals: availableMeals as Meal[],
-}));
+const dishesDatasource: Dish[] = Dishes.dishes.map(
+  ({ availableMeals, ...remain }) => ({
+    ...remain,
+    availableMeals: availableMeals as Meal[],
+  })
+);
 
 interface DishSelectionFormProps {
   readonly selectedMealType: Meal;
@@ -28,7 +30,7 @@ const DishSelectionForm: FC<DishSelectionFormProps> = ({
       Please Pre-order your food
     </h3>
     <div className="grid grid-cols-3 gap-3">
-      {dishes
+      {dishesDatasource
         .filter(
           (dish) =>
             dish.restaurant === selectedRestaurant &&

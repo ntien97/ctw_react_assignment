@@ -8,9 +8,10 @@ import { Meal } from "./interfaces/meal.enum";
 import Stepper from "./components/dumb/Stepper/Stepper";
 import DishSelectionForm from "./components/DishSelectionForm/DishSelectionForm";
 import { Reservation } from "./interfaces/reservation.interface";
+import ReservationConfirmation from "./components/ReservationConfirmation/ReservationConfirmation";
 
 function App() {
-  const [activeIndex, updateActiveIndex] = useState(0);
+  const [activeStepIdx, updateActiveStepIdx] = useState(0);
   const [reservation, updateReservation] = useState<Reservation>({
     meal: Meal.Breakfast,
     partySize: 1,
@@ -42,9 +43,13 @@ function App() {
               description: "Confirm your order",
             },
           ]}
-          activeIndex={activeIndex}
-          onPrevious={() => updateActiveIndex(activeIndex - 1)}
-          onNext={() => updateActiveIndex(activeIndex + 1)}
+          activeIndex={activeStepIdx}
+          onPrevious={() => updateActiveStepIdx(activeStepIdx - 1)}
+          onNext={() => updateActiveStepIdx(activeStepIdx + 1)}
+          onComplete={() => {
+            // TODO: Connect the backend here!
+            console.log(reservation);
+          }}
         >
           <MealSelectionForm
             selectedMeal={reservation.meal}
@@ -63,7 +68,7 @@ function App() {
           <RestaurantSelectionForm
             selectedMealType={reservation.meal}
             onSelected={(restaurant) => {
-              updateActiveIndex(activeIndex + 1);
+              updateActiveStepIdx(activeStepIdx + 1);
               updateReservation({
                 ...reservation,
                 restaurant,
@@ -81,7 +86,9 @@ function App() {
               })
             }
           ></DishSelectionForm>
-          <></>
+          <ReservationConfirmation
+            reservation={reservation}
+          ></ReservationConfirmation>
         </Stepper>
       </div>
     </div>
