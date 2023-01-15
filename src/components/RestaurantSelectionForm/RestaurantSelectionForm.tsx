@@ -47,7 +47,7 @@ const RestaurantSelectionForm: FC<RestaurantSelectionFormProps> = ({
 }) => (
   <>
     <h3 className="mb-5 text-lg font-medium text-gray-900">
-      Please Select a restaurant
+      Let's choose a Restaurant!
     </h3>
     <div className="grid grid-cols-3 gap-3">
       {restaurants

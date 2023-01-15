@@ -13,7 +13,7 @@ const PartySizeSelection: FC<PartySizeSelectionProps> = ({
 }) => (
   <div>
     <h3 className="mb-5 text-lg font-medium text-gray-900">
-      Please Enter number of people
+      How many people would be joining?
     </h3>
     <div className="flex text-gray-600 items-center gap-4">
       <svg

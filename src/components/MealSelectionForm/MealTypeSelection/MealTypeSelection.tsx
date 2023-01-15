@@ -28,7 +28,7 @@ const MealTypeSelection: FC<MealTypeSelectionProps> = ({
 }) => (
   <div>
     <h3 className="mb-5 text-lg font-medium text-gray-900">
-      Please select a meal
+      When would you like your reservation to be?
     </h3>
 
     <ul className="grid w-full gap-6 md:grid-cols-3">
